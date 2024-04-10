@@ -14,3 +14,10 @@ API --> url
 
 //3000 -->port number
 //http://localhost:3000/endpoint
+
+//find
+//filter
+//sort
+//forEach
+//map
+//reduce

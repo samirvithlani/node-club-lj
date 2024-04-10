@@ -64,7 +64,50 @@ app.get("/users",(req,res)=>{
 
 })
 
+//:id is a dynamic value
+app.get("/users/:id",(req,res)=>{
 
+    var users = [
+        {
+            id:1,
+            name:"Amit",
+            age:23
+        },
+        {
+            id:2,
+            name:"Sumit",
+            age:24
+        }
+    ]
+
+    //req.params
+    //req.query
+    //req.body
+    //req.headers
+
+    
+
+    console.log("param :  ",req.params)
+    var id = req.params.id
+    const user = users.find((user)=>user.id == id)
+    console.log("id = ",id)
+    console.log("user = ",user)
+
+   if(user!=undefined){
+    res.json({
+        message:"User found",
+        data:user
+    })
+   }
+   else{
+    res.json({
+        message:"User not found",
+        data:null
+    })
+   }
+
+
+})
 
 
 console.log("app.js")
