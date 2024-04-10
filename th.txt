@@ -1,0 +1,16 @@
+API -->application programming interface
+[-] -->[-]
+
+forms --> get post
+
+4 request methods
+
+1)GET :--> get data from server : browser support
+2)POST :--> send data to server
+3)PUT :--> update data
+4)DELETE :--> delete data
+
+API --> url
+
+//3000 -->port number
+//http://localhost:3000/endpoint
