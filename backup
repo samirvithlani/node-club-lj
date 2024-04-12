@@ -1,9 +1,0 @@
-
-console.log("hello")
-var users = require('./users.js');
-console.log(users); // John Doe
-
-console.log(users.userName); // John Doe
-console.log(users.userAge); // 25
-
-users.getUserData(); // user data

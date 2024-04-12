@@ -21,3 +21,9 @@ API --> url
 //forEach
 //map
 //reduce
+
+
+
+mongoose --> ORM --> object relational mapping
+
+npm install mongoose

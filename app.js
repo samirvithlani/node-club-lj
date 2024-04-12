@@ -1,112 +1,24 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
-
-//devtools npm
-//nodemon
-//npm install nodemon -g 
-//global install
+//require routes
+const userRoutes = require("./src/routes/UserRoutes")
 
 
-//http://localhost:3000/test
-app.get("/test",(req,res)=>{
+//use routes
 
-    console.log("test")
-    res.send("test api called...")
-
-})
-
-app.get("/test2",(req,res)=>{
-
-    res.json({
-        message:"test2 api called..."
-    })
-})
-
-app.get("/user",(req,res)=>{
-
-    var user = {
-        id:1,
-        name:"Amit",
-        age:23
-    }
-
-    res.json(
-        {
-        message:"User api called...",
-        data:user
-        }
-    )
+//what is use of use : it is used to use the routes and middleware
+//localhost:3000/users 
+// -->app --> userRoutes --> userController --> userModel --> userController --> app --> response
+app.use("/users",userRoutes)
 
 
-})
 
-
-app.get("/users",(req,res)=>{
-
-    var users = [
-        {
-            id:1,
-            name:"Amit",
-            age:23
-        },
-        {
-            id:2,
-            name:"Sumit",
-            age:24
-        }
-    ]
-
-    res.json({
-        message:"Users api called...",
-        data:users
-    })
-
-})
-
-//:id is a dynamic value
-app.get("/users/:id",(req,res)=>{
-
-    var users = [
-        {
-            id:1,
-            name:"Amit",
-            age:23
-        },
-        {
-            id:2,
-            name:"Sumit",
-            age:24
-        }
-    ]
-
-    //req.params
-    //req.query
-    //req.body
-    //req.headers
-
-    
-
-    console.log("param :  ",req.params)
-    var id = req.params.id
-    const user = users.find((user)=>user.id == id)
-    console.log("id = ",id)
-    console.log("user = ",user)
-
-   if(user!=undefined){
-    res.json({
-        message:"User found",
-        data:user
-    })
-   }
-   else{
-    res.json({
-        message:"User not found",
-        data:null
-    })
-   }
-
-
+mongoose.connect("mongodb://127.0.0.1:27017/node_backup").then(()=>{
+    console.log("Connected to database...")
+}).catch((err)=>{
+    console.log("Error connecting to database...",err)
 })
 
 
