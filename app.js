@@ -12,6 +12,7 @@ const userRoutes = require("./src/routes/UserRoutes")
 //localhost:3000/users 
 // -->app --> userRoutes --> userController --> userModel --> userController --> app --> response
 app.use("/users",userRoutes)
+//localhost:3000/users/user
 
 
 
