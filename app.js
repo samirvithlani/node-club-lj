@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 app.use(express.json()) //middleware
+app.use(express.urlencoded({extended:true})) //middleware
 
 //require routes
 const userRoutes = require("./src/routes/UserRoutes")
