@@ -27,3 +27,7 @@ API --> url
 mongoose --> ORM --> object relational mapping
 
 npm install mongoose
+
+req.params users/:id
+req.query users?name=abc
+req.body : -->

@@ -61,9 +61,31 @@ const getUserByAge = async(req,res)=>{
 }
 
 
+const addUser = async(req,res)=>{
+
+    // const user = req.body;
+    // console.log(user)
+
+    // res.json({
+    //     message:"ok.."
+    // })
+
+    const user = await userSchema.create(req.body)
+    res.status(201).json({
+        message:"User added",
+        data:user,
+    })
+
+
+
+}
+
+
+
 module.exports = {
     getAllUsers,
     getUserById,
     getUserByNameFileter,
-    getUserByAge
+    getUserByAge,
+    addUser
 }
