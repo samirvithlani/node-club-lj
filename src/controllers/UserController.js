@@ -4,7 +4,7 @@ const userSchema = require("../models/UserModel");
 
 const getAllUsers = async (req, res) => {
   //db.Users.find()
-  const users = await userSchema.find();
+  const users = await userSchema.find({ status: true});
   res.json({
     message: "Users fetched...",
     data: users,
@@ -123,6 +123,31 @@ const updateUser = async (req, res) => {
   }
 };
 
+const softDeleteUser = async (req, res) => {
+
+  const id = req.params.id; //id from url which we want to delete
+
+  try{
+
+      const updatedUser = await userSchema.findByIdAndUpdate(id,{status:false},{new:true});
+      res.status(200).json({
+        message:"User deleted",
+        data:updatedUser
+      })
+
+  }catch(err){
+
+    res.status(400).json({
+      message:"Failed to delete user",
+      error:err
+    })
+
+  }
+
+
+
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -131,4 +156,5 @@ module.exports = {
   addUser,
   deleteUser,
   updateUser,
+  softDeleteUser
 };

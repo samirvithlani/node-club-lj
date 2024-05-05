@@ -8,6 +8,7 @@ router.get("/userbyage",userController.getUserByAge)
 router.post("/user",userController.addUser)
 router.delete("/user/:id",userController.deleteUser)
 router.put("/user/:id",userController.updateUser)
+router.put("/softdeleteuser/:id",userController.softDeleteUser)
 //post/
 //put/
 //delete/
