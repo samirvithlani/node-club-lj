@@ -73,10 +73,62 @@ const addUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const id = req.params.id; //id from url which we want to delete
+  try {
+    const deletedUser = await userSchema.findByIdAndDelete(id);
+    if (deletedUser == null) {
+      res.status(404).json({
+        message: "User not found",
+      });
+    } else {
+      res.json({
+        message: "User deleted",
+        data: deletedUser,
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      message: "Failed to delete user",
+      error: err,
+    });
+  }
+};
+
+const updateUser = async (req, res) => {
+  //update user set =? ,? where id = ?
+  const id = req.params.id; //id from url which we want to update
+  const updateObj = req.body; //data from client which we want to update
+
+  //{new:true} --> return updated document
+  try {
+    const updatedUser = await userSchema.findByIdAndUpdate(id, updateObj, {
+      new: true,
+    });
+    if (updatedUser == null) {
+      res.status(404).json({
+        message: "User not found",
+      });
+    } else {
+      res.json({
+        message: "User updated",
+        data: updatedUser,
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      message: "Failed to update user",
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   getUserByNameFileter,
   getUserByAge,
   addUser,
+  deleteUser,
+  updateUser,
 };

@@ -11,6 +11,10 @@ const userSchema = new Schema({
     },
     age:{
         type: Number
+    },
+    status:{
+        type: Boolean,
+        default: true
     }
 })
 

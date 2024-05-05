@@ -31,3 +31,6 @@ npm install mongoose
 req.params users/:id
 req.query users?name=abc
 req.body : -->
+
+
+DELETE -->localhost:3000/users/:id

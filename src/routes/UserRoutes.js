@@ -6,6 +6,8 @@ router.get("/user/:id",userController.getUserById)
 router.get("/userbyname/:name",userController.getUserByNameFileter)
 router.get("/userbyage",userController.getUserByAge)
 router.post("/user",userController.addUser)
+router.delete("/user/:id",userController.deleteUser)
+router.put("/user/:id",userController.updateUser)
 //post/
 //put/
 //delete/
