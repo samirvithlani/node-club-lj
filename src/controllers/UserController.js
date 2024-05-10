@@ -1,10 +1,11 @@
 const userSchema = require("../models/UserModel");
+const roleSchema = require("../models/RoleModel");
 //db.users.find()
 //userSchema.find()
 
 const getAllUsers = async (req, res) => {
   //db.Users.find()
-  const users = await userSchema.find({ status: true});
+  const users = await userSchema.find({ status: true}).populate("role");
   res.json({
     message: "Users fetched...",
     data: users,

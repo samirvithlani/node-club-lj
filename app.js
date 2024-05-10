@@ -8,6 +8,7 @@ app.use(express.urlencoded({extended:true})) //middleware
 const userRoutes = require("./src/routes/UserRoutes")
 
 
+
 //use routes
 
 //what is use of use : it is used to use the routes and middleware

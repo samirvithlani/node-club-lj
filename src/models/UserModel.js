@@ -15,6 +15,10 @@ const userSchema = new Schema({
     status:{
         type: Boolean,
         default: true
+    },
+    role:{
+        type:Schema.Types.ObjectId,
+        ref:"Role"
     }
 })
 
