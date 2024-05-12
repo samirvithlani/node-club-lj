@@ -44,3 +44,15 @@ role --> 1)admin 2)user 3)guest
 insert into user('','','',1)
 
 select * from users naturl join role ;
+
+
+USER    --->
+product --->
+
+
+user will buy product
+
+
+
+
+

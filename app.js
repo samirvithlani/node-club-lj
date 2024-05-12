@@ -6,6 +6,8 @@ app.use(express.urlencoded({extended:true})) //middleware
 
 //require routes
 const userRoutes = require("./src/routes/UserRoutes")
+const productRoutes = require("./src/routes/ProductRoutes")
+const cartRoutes = require("./src/routes/CartRoutes")
 
 
 
@@ -15,6 +17,8 @@ const userRoutes = require("./src/routes/UserRoutes")
 //localhost:3000/users 
 // -->app --> userRoutes --> userController --> userModel --> userController --> app --> response
 app.use("/users",userRoutes)
+app.use("/products",productRoutes)
+app.use("/cart",cartRoutes)
 //localhost:3000/users/user
 
 
