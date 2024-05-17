@@ -9,6 +9,9 @@ const productSchema = new Schema(
         price:{
             type: Number,
         },
+        colors:[{
+            type: String
+        }]
         
     },
     {

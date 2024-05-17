@@ -15,7 +15,7 @@ const addToCart = async (req, res) => {
 
 const getCart = async (req, res) => {
 
-    const cart = await cartSchema.find().populate("user").populate("product");
+    const cart = await cartSchema.find().populate("user").populate("products");
     res.status(200).json({
         status: "success",
         data: cart
