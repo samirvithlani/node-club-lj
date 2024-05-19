@@ -14,11 +14,14 @@ const userSchema = new Schema({
     },
     status:{
         type: Boolean,
-        default: true
+        default: false
     },
     role:{
         type:Schema.Types.ObjectId,
         ref:"Role"
+    },
+    password:{
+        type:String
     }
     
 })

@@ -53,6 +53,22 @@ product --->
 user will buy product
 
 
+nodemailer --> npm install nodemailer
+fykwujelmcqtihkm
+pythonforsamir@gmail.com
+
+--------------------------
+
+otp send to email
+
+----------->POST verfiy user
+email :req.body
+otp : req.body
+time: now
+
+update status of user to true
+
+
 
 
 

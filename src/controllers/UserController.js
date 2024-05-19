@@ -1,5 +1,6 @@
 const userSchema = require("../models/UserModel");
 const roleSchema = require("../models/RoleModel");
+const mailutil = require("../utils/MailUtils");
 //db.users.find()
 //userSchema.find()
 
@@ -62,6 +63,11 @@ const addUser = async (req, res) => {
 
   try {
     const user = await userSchema.create(req.body);
+
+    const otp = Math.floor(1000 + Math.random() * 9000);
+    await mailutil.sendingMail(user.email, "OTP VERIFACTION", otp);
+
+
     res.status(201).json({
       message: "User added",
       data: user,
