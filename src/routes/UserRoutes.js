@@ -5,7 +5,7 @@ const authmiddleware = require("../middleware/authmiddleware")
 const zodMiddleware = require("../middleware/ZodMiddlewar")
 const userValidationSchema = require("../utils/UserValidationSchema")
 
-
+//apply middleware
 router.get("/user",authmiddleware.validateRequest,userController.getAllUsers)
 
 router.get("/user/:id",userController.getUserById)

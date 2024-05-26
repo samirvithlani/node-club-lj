@@ -68,6 +68,12 @@ time: now
 
 update status of user to true
 
+otpModel
+
+fileUopload..... : local folder
+cloud storage :aws s3,clooudinary,google drive
+
+multer
 
 
 

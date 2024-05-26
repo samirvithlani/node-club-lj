@@ -66,7 +66,8 @@ const addUser = async (req, res) => {
 
     const otp = Math.floor(1000 + Math.random() * 9000);
     await mailutil.sendingMail(user.email, "OTP VERIFACTION", otp);
-
+    //email,otp
+    //otpschem.create({ email: user.email, otp: otp });
 
     res.status(201).json({
       message: "User added",
