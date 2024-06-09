@@ -1,12 +1,13 @@
 const userSchema = require("../models/UserModel");
 const roleSchema = require("../models/RoleModel");
 const mailutil = require("../utils/MailUtils");
+const tokenUtil = require("../utils/TokenUtil");
 //db.users.find()
 //userSchema.find()
 
 const getAllUsers = async (req, res) => {
   //db.Users.find()
-  const users = await userSchema.find({status:true}).populate("role");
+  const users = await userSchema.find({ status: true }).populate("role");
   res.json({
     message: "Users fetched...",
     data: users,
@@ -132,29 +133,48 @@ const updateUser = async (req, res) => {
 };
 
 const softDeleteUser = async (req, res) => {
-
   const id = req.params.id; //id from url which we want to delete
 
-  try{
-
-      const updatedUser = await userSchema.findByIdAndUpdate(id,{status:false},{new:true});
-      res.status(200).json({
-        message:"User deleted",
-        data:updatedUser
-      })
-
-  }catch(err){
-
+  try {
+    const updatedUser = await userSchema.findByIdAndUpdate(
+      id,
+      { status: false },
+      { new: true }
+    );
+    res.status(200).json({
+      message: "User deleted",
+      data: updatedUser,
+    });
+  } catch (err) {
     res.status(400).json({
-      message:"Failed to delete user",
-      error:err
-    })
-
+      message: "Failed to delete user",
+      error: err,
+    });
   }
+};
 
+const loginUser = async (req, res) => {
+  const userEmail = req.body.email;
+  const userPassword = req.body.password;
 
-
-}
+  try {
+    const user = await userSchema.findOne({
+      email: userEmail,
+      password: userPassword,
+    });
+    if (user) {
+      const token = tokenUtil.generateToken(user.toObject());
+      res.status(200).json({
+        message: "User logged in",
+        token: token,
+      });
+    } else {
+      res.status(404).json({
+        message: "User not found",
+      });
+    }
+  } catch (err) {}
+};
 
 module.exports = {
   getAllUsers,
@@ -164,5 +184,6 @@ module.exports = {
   addUser,
   deleteUser,
   updateUser,
-  softDeleteUser
+  softDeleteUser,
+  loginUser,
 };

@@ -6,7 +6,7 @@ const zodMiddleware = require("../middleware/ZodMiddlewar")
 const userValidationSchema = require("../utils/UserValidationSchema")
 
 //apply middleware
-router.get("/user",authmiddleware.validateRequest,userController.getAllUsers)
+router.get("/user",authmiddleware.validateUser,userController.getAllUsers)
 
 router.get("/user/:id",userController.getUserById)
 router.get("/userbyname/:name",userController.getUserByNameFileter)
@@ -17,6 +17,7 @@ router.post("/user",zodMiddleware.validateSchema(userValidationSchema),userContr
 router.delete("/user/:id",userController.deleteUser)
 router.put("/user/:id",userController.updateUser)
 router.put("/softdeleteuser/:id",userController.softDeleteUser)
+router.post("/login",userController.loginUser)
 //post/
 //put/
 //delete/
