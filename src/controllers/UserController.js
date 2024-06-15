@@ -2,12 +2,13 @@ const userSchema = require("../models/UserModel");
 const roleSchema = require("../models/RoleModel");
 const mailutil = require("../utils/MailUtils");
 const tokenUtil = require("../utils/TokenUtil");
+const encrypt = require("../utils/encrypt");
 //db.users.find()
 //userSchema.find()
 
 const getAllUsers = async (req, res) => {
   //db.Users.find()
-  const users = await userSchema.find({ status: true }).populate("role");
+  const users = await userSchema.find().populate("role");
   res.json({
     message: "Users fetched...",
     data: users,
@@ -55,18 +56,20 @@ const getUserByAge = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
-  // const user = req.body;
-  // console.log(user)
-
-  // res.json({
-  //     message:"ok.."
-  // })
+  const hashedPassword = await encrypt.encryptPassword(req.body.password);
 
   try {
-    const user = await userSchema.create(req.body);
+    const userObj = {
+      name: req.body.name,
+      email: req.body.email,
+      age: req.body.age,
+      role: req.body.role,
+      password: hashedPassword,
+    };
+    const user = await userSchema.create(userObj);
 
     const otp = Math.floor(1000 + Math.random() * 9000);
-    await mailutil.sendingMail(user.email, "OTP VERIFACTION", otp);
+    //await mailutil.sendingMail(user.email, "OTP VERIFACTION", otp);
     //email,otp
     //otpschem.create({ email: user.email, otp: otp });
 
@@ -153,27 +156,55 @@ const softDeleteUser = async (req, res) => {
   }
 };
 
+// const loginUser = async (req, res) => {
+//   const userEmail = req.body.email;
+//   const userPassword = req.body.password;
+
+//   try {
+//     const user = await userSchema.findOne({
+//       email: userEmail,
+//       password: userPassword,
+//     });
+//     if (user) {
+//       const token = tokenUtil.generateToken(user.toObject());
+//       res.status(200).json({
+//         message: "User logged in",
+//         token: token,
+//       });
+//     } else {
+//       res.status(404).json({
+//         message: "User not found",
+//       });
+//     }
+//   } catch (err) {}
+// };
+
 const loginUser = async (req, res) => {
   const userEmail = req.body.email;
-  const userPassword = req.body.password;
+  const userPassword = req.body.password; //plain text password
 
-  try {
-    const user = await userSchema.findOne({
-      email: userEmail,
-      password: userPassword,
-    });
-    if (user) {
-      const token = tokenUtil.generateToken(user.toObject());
+  const userFromEmail = await userSchema.findOne({ email: userEmail });
+  if (userFromEmail) {
+    const isMatch = await encrypt.comparePassword(
+      userPassword,
+      userFromEmail.password
+    );
+    if (isMatch) {
+      const token = tokenUtil.generateToken(userFromEmail.toObject());
       res.status(200).json({
         message: "User logged in",
         token: token,
       });
     } else {
-      res.status(404).json({
-        message: "User not found",
+      res.status(400).json({
+        mFessage: "Invalid Password",
       });
     }
-  } catch (err) {}
+  } else {
+    res.status(404).json({
+      message: "User not found",
+    });
+  }
 };
 
 module.exports = {
