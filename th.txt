@@ -75,6 +75,48 @@ cloud storage :aws s3,clooudinary,google drive
 
 multer
 
+---------------------------------------------
+twwiter
+
+user auth
+userModel: email,password,firstName,LastName,age,profilePic,[status,isActive],timeStamp true
+
+post model[twwit model]:
+twwit : string
+userId : ref user
+image : string
+likeCount:
+likedBy : [ref user]
+timeStamp
+
+
+-------------
+npm init
+npm install express
+npm install mongoose
+npm install nodemailer
+npm install multer
+npm install cloudinary
+npm install bcrypt
+npm install jsonwebtoken
+npm install path
+//npm install zod
+
+folders
+1)models
+2)routes
+3)controllers
+4)middlewares
+5)utils
+
+
+userRoutes
+createUser : profileUpload
+loginUser  : email,password :-
+getUser
+
+
+
 
 
 

@@ -24,7 +24,7 @@ const userSchema = new Schema({
         type:String
     }
     
-})
+},{timestamps:true})
 
 //db.Users.find()
 // mongoose.model("User",userSchema)
