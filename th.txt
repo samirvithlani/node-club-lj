@@ -120,3 +120,13 @@ getUser
 
 
 
+post model:[tweet]
+message
+user : ref
+imageUrl :
+likeCount:number default:0
+likedBy[{ref user}]
+
+---------------
+
+crud
