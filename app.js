@@ -32,7 +32,7 @@ app.get('/index', (req, res) => {
 });
 
 
-io.on('connection', () => {
+io.on('connection', (socket) => {
     console.log('User connected to socket...',socket.id);
     socket.on('message',(data)=>{
         console.log(data);
