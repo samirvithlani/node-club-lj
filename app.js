@@ -8,7 +8,7 @@ const app = express();// Express app
 const server = http.createServer(app); // HTTP server
 const io = new Server(server); // Socket.io server
 
-// Middleware
+// Middlewsocketare
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -32,7 +32,7 @@ app.get('/index', (req, res) => {
 });
 
 
-io.on('connection', (socket) => {
+io.on('connection', () => {
     console.log('User connected to socket...',socket.id);
     socket.on('message',(data)=>{
         console.log(data);
