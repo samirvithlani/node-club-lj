@@ -6,8 +6,8 @@ const zodMiddleware = require("../middleware/ZodMiddlewar")
 const userValidationSchema = require("../utils/UserValidationSchema")
 
 //apply middleware
-router.get("/user",authmiddleware.validateUser,userController.getAllUsers)
-
+//router.get("/user",authmiddleware.validateUser,userController.getAllUsers)
+router.get("/user",userController.getAllUsers)
 router.get("/user/:id",userController.getUserById)
 router.get("/userbyname/:name",userController.getUserByNameFileter)
 router.get("/userbyage",userController.getUserByAge)

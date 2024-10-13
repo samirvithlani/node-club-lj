@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const http = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();// Express app
 const server = http.createServer(app); // HTTP server
@@ -11,6 +12,7 @@ const io = new Server(server); // Socket.io server
 // Middlewsocketare
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Serve static files
 app.use(express.static(path.resolve('./public')));
@@ -35,7 +37,7 @@ app.get('/index', (req, res) => {
 io.on('connection', (socket) => {
     console.log('User connected to socket...',socket.id);
     socket.on('message',(data)=>{
-        console.log(data);
+        //console.log(data);
         //io.emit('message',data);
         //io.emit('recive-message',data);
         socket.broadcast.emit('recive-message',data);
@@ -52,7 +54,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/node_backup')
         console.log('Error connecting to database...', err);
     });
 
-const PORT = 3000;
+const PORT = 3001;
 server.listen(PORT, () => {
     console.log('Server is running on port ' + PORT);
 });
